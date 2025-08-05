@@ -213,7 +213,13 @@ export function filterJobs(jobs: Job[], filters: JobFilters): Job[] {
 export function extractApplicationLink(linkHtml: string): string {
     if (!linkHtml) return '#';
     
-    // Extract href from HTML anchor tag
+    // Check if the link is already a direct URL (new format)
+    // This handles both http and https URLs
+    if (linkHtml.match(/^https?:\/\//)) {
+        return linkHtml;
+    }
+    
+    // Fallback: Extract href from HTML anchor tag (legacy format)
     const hrefMatch = linkHtml.match(/href=['"]([^'"]*)['"]/);
     return hrefMatch ? hrefMatch[1] : '#';
 }
