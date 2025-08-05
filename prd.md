@@ -1,0 +1,12 @@
+# **Project Requirements Document: The Job Finder Website**
+
+The following table outlines the detailed functional requirements of The Job Finder website.
+
+| Requirement ID | Description               | User Story                                                                                     | Expected Behavior/Outcome                                                                                                     |
+|----------------|---------------------------|------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| FR001          | Display Jobs dashboard    | As a user, I want to be able to open landing page and see interactive dashboard.               | The system should provide a clear way for the user to interact with dashboard, i.e. search by company or job title or location|
+| FR002          | Display Jobs cards        | As a user, I want to be able to see each Job as a clickable card.                              | Each Lob should be presented as card containing Title, Company name and Location. Job application page should open on click.  |
+| FR003          | Dashboard should display agregated information about jobs | As a user, I want to be able to see agregated information about total number of jobs and companies. | The system should display a clickable card with total number of jobs and companies |
+| FR004          | Dashboard should allow for filtering    | As a user, I want to be able to filter jobs by Company, Location and Title. | The system should provide a way for users to set a filter by Company, Location and/or Title|
+| FR005          | Total jobs number card opens statistics page | As a user, I want to be able to see how many jobs per company and/or location. | The system should provide a mechanism for users to see a statistics about jobs per company or location |
+| FR006          | Total Companies number card opens full list   | As a user, I want to be able to see full list of companies and their carriers pages. | The system should provide a comprehensive table with company name hyperlinked to a website and carries pages |
