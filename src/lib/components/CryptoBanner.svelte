@@ -20,7 +20,7 @@
     <!-- Floating Crypto Icons -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-4 left-10 animate-bounce" style="animation-delay: 0s;">
-            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-white font-bold text-sm opacity-70">
+            <div class="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center text-white font-bold text-xl opacity-70">
                 ₿
             </div>
         </div>
@@ -48,8 +48,13 @@
             </div>
         </div>
         <div class="absolute bottom-6 left-20 animate-bounce" style="animation-delay: 2s;">
-            <div class="w-7 h-7 bg-green-400 rounded-full flex items-center justify-center text-white font-bold text-sm opacity-50">
-                ◊
+            <div class="w-14 h-14 bg-green-400 rounded-full flex items-center justify-center text-white font-bold text-lg opacity-50">
+                ₮
+            </div>
+        </div>
+        <div class="absolute bottom-12 right-16 animate-bounce" style="animation-delay: 3s;">
+            <div class="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-base opacity-60">
+                $
             </div>
         </div>
         <div class="absolute top-8 left-1/3 animate-pulse">
