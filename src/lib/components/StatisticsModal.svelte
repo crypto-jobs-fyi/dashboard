@@ -72,7 +72,7 @@
         </div>
 
         <!-- Summary Stats -->
-        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="mt-8 grid grid-cols-3 gap-4">
             <div class="text-center p-4 bg-blue-50 rounded-lg">
                 <div class="text-2xl font-bold text-blue-600">{stats.totalJobs}</div>
                 <div class="text-sm text-blue-600">Total Jobs</div>
@@ -84,12 +84,6 @@
             <div class="text-center p-4 bg-purple-50 rounded-lg">
                 <div class="text-2xl font-bold text-purple-600">{locationsArray.length}</div>
                 <div class="text-sm text-purple-600">Locations</div>
-            </div>
-            <div class="text-center p-4 bg-orange-50 rounded-lg">
-                <div class="text-2xl font-bold text-orange-600">
-                    {Math.round(stats.totalJobs / stats.totalCompanies * 100) / 100}
-                </div>
-                <div class="text-sm text-orange-600">Avg Jobs/Company</div>
             </div>
         </div>
     </div>
