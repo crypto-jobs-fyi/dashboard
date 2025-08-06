@@ -47,7 +47,7 @@
                 logoUrl: getCompanyLogo(companyName, companyInfo?.company_url)
             };
         })
-        .sort((a, b) => a.company.localeCompare(b.company));
+        .sort((a, b) => b.count - a.count); // Sort by job count descending (most jobs first)
     
     // Function to get company logo URL using real company data
     function getCompanyLogo(companyName: string, companyUrl?: string): string {
