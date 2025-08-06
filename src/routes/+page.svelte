@@ -7,6 +7,7 @@
 	import JobGrid from '$lib/components/JobGrid.svelte';
 	import StatisticsModal from '$lib/components/StatisticsModal.svelte';
 	import CompaniesModal from '$lib/components/CompaniesModal.svelte';
+	import CryptoBanner from '$lib/components/CryptoBanner.svelte';
 
 	let jobs: Job[] = [];
 	let filteredJobs: Job[] = [];
@@ -200,6 +201,9 @@
 			</div>
 		</div>
 	</header>
+
+	<!-- Crypto Banner -->
+	<CryptoBanner />
 
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 		{#if loading}
