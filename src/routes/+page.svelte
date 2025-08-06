@@ -182,13 +182,10 @@
 					<h1 class="text-3xl font-bold text-gray-900">
 						🚀 Crypto Job Finder
 					</h1>
-					<p class="text-gray-600 mt-1">
-						Discover opportunities in blockchain and cryptocurrency
-					</p>
 				</div>
 				<div class="text-right">
 					<p class="text-sm text-gray-500">
-						Data updated regularly from top crypto companies
+						Data updated daily from top crypto companies
 					</p>
 					<button 
 						on:click={handleRefresh}
