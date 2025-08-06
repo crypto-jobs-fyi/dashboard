@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { Job, JobStats, JobFilters } from '$lib/types.js';
-	import { fetchJobsData, processJobsData, filterJobs, fetchCompaniesData, clearCompaniesCache } from '$lib/jobsData';
+	import { fetchJobsData, processJobsData, filterJobs, fetchCompaniesData, clearAllCaches } from '$lib/jobsData';
 	import StatsCards from '$lib/components/StatsCards.svelte';
 	import JobFiltersComponent from '$lib/components/JobFiltersComponent.svelte';
 	import JobGrid from '$lib/components/JobGrid.svelte';
@@ -104,31 +104,65 @@
 	}
 
 	async function handleRefresh() {
+		console.log('=== REFRESH INITIATED ===');
 		loading = true;
 		error = '';
+		
+		// Set a timeout for the refresh operation
+		const timeoutId = setTimeout(() => {
+			console.log('=== REFRESH TIMEOUT ===');
+			if (loading) {
+				error = 'Refresh timed out. Please check your internet connection and try again.';
+				loading = false;
+			}
+		}, 15000); // 15 second timeout for refresh
+		
 		try {
-			// Clear the companies cache to ensure fresh data
-			clearCompaniesCache();
+			console.log('Clearing caches...');
+			// Clear all caches to ensure fresh data
+			clearAllCaches();
 			
+			console.log('Fetching fresh data...');
 			// Fetch both jobs and companies data in parallel to refresh cache
-			const [jobsResult] = await Promise.allSettled([
+			const [jobsResult, companiesResult] = await Promise.allSettled([
 				fetchJobsData(),
 				fetchCompaniesData() // This will refresh the cache for other components
 			]);
 			
 			if (jobsResult.status === 'fulfilled') {
 				jobs = jobsResult.value;
+				console.log('Fresh jobs data loaded:', jobs.length, 'jobs');
 			} else {
+				console.error('Failed to fetch jobs:', jobsResult.reason);
 				throw new Error('Failed to fetch jobs data');
 			}
 			
+			if (companiesResult.status === 'rejected') {
+				console.warn('Companies data fetch failed:', companiesResult.reason);
+				// Don't fail the entire refresh if companies data fails
+			}
+			
+			if (jobs.length === 0) {
+				throw new Error('No jobs data received');
+			}
+			
+			// Reprocess and filter data
 			stats = processJobsData(jobs);
-			filteredJobs = [...jobs];
+			filteredJobs = filterJobs(jobs, filters); // Apply current filters
+			
+			console.log('=== REFRESH SUCCESS ===');
+			console.log('Refreshed data:', stats.totalJobs, 'jobs,', stats.totalCompanies, 'companies');
+			
+			// Clear timeout since we succeeded
+			clearTimeout(timeoutId);
 		} catch (err) {
-			error = 'Failed to load job data. Please try again later.';
-			console.error('Error loading jobs:', err);
+			console.log('=== REFRESH ERROR ===');
+			console.error('Error during refresh:', err);
+			error = 'Failed to refresh data. Please try again later.';
+			clearTimeout(timeoutId);
 		} finally {
 			loading = false;
+			console.log('=== REFRESH COMPLETE ===');
 		}
 	}
 </script>
@@ -157,10 +191,10 @@
 					</p>
 					<button 
 						on:click={handleRefresh}
-						class="mt-2 px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors"
+						class="mt-2 px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 						disabled={loading}
 					>
-						{loading ? 'Loading...' : 'Refresh Data'}
+						{loading ? 'Refreshing...' : 'Refresh Data'}
 					</button>
 				</div>
 			</div>

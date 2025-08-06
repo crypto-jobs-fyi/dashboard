@@ -8,6 +8,7 @@ export {
     filterJobs, 
     extractApplicationLink,
     clearCompaniesCache,
+    clearAllCaches,
     getCachedCompaniesData,
     isCacheValid
 } from './jobsData.js';

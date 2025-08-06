@@ -46,7 +46,8 @@ export async function fetchJobsData(): Promise<Job[]> {
         // Fallback to XMLHttpRequest if fetch fails
         try {
             console.log('Trying XMLHttpRequest fallback...');
-            const data = await fetchWithXHR(JOBS_DATA_URL);
+            const cacheBuster = `?t=${Date.now()}`;
+            const data = await fetchWithXHR(JOBS_DATA_URL + cacheBuster);
             return data.data || [];
         } catch (xhrError) {
             console.error('XMLHttpRequest also failed:', xhrError);
@@ -230,6 +231,21 @@ export function clearCompaniesCache(): void {
     companiesCachePromise = null;
     cacheTimestamp = 0;
     console.log('Companies cache cleared');
+}
+
+export function clearAllCaches(): void {
+    clearCompaniesCache();
+    // Clear any browser cache for the specific URLs if possible
+    if ('caches' in window) {
+        caches.keys().then(cacheNames => {
+            cacheNames.forEach(cacheName => {
+                if (cacheName.includes('jobs') || cacheName.includes('companies')) {
+                    caches.delete(cacheName);
+                }
+            });
+        }).catch(err => console.log('Cache clearing failed:', err));
+    }
+    console.log('All caches cleared');
 }
 
 export function getCachedCompaniesData(): Company[] | null {
