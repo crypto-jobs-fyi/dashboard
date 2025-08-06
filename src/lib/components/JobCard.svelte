@@ -64,8 +64,8 @@
 
 <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
     <!-- Level 1: Job Title -->
-    <div class="mb-3 text-center">
-        <h3 class="text-xl font-bold text-gray-900 line-clamp-2">
+    <div class="mb-3 text-center h-12 flex items-center justify-center">
+        <h3 class="text-xl font-bold text-gray-900 line-clamp-2 leading-6">
             {job.title}
         </h3>
     </div>
