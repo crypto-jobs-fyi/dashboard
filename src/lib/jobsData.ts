@@ -196,17 +196,26 @@ export function processJobsData(jobs: Job[]): JobStats {
     return stats;
 }
 
+function getFilterTerms(input?: string): string[] {
+    if (!input) return [];
+    return input
+        .split(/[\n,]+/)
+        .map(s => s.trim().toLowerCase())
+        .filter(Boolean);
+}
+
+function matchesAnyTerm(value: string, input?: string): boolean {
+    const terms = getFilterTerms(input);
+    if (terms.length === 0) return true;
+    const haystack = value.toLowerCase();
+    return terms.some(term => haystack.includes(term));
+}
+
 export function filterJobs(jobs: Job[], filters: JobFilters): Job[] {
     return jobs.filter(job => {
-        const matchesCompany = !filters.company || 
-            job.company.toLowerCase().includes(filters.company.toLowerCase());
-        
-        const matchesLocation = !filters.location || 
-            job.location.toLowerCase().includes(filters.location.toLowerCase());
-        
-        const matchesTitle = !filters.title || 
-            job.title.toLowerCase().includes(filters.title.toLowerCase());
-
+        const matchesCompany = matchesAnyTerm(job.company, filters.company);
+        const matchesLocation = matchesAnyTerm(job.location, filters.location);
+        const matchesTitle = matchesAnyTerm(job.title, filters.title);
         return matchesCompany && matchesLocation && matchesTitle;
     });
 }

@@ -11,8 +11,35 @@
 </script>
 
 <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
-	<div class="mb-4 flex items-center justify-between">
-		<h2 class="text-lg font-semibold text-gray-900">Filter Jobs</h2>
+	<!-- Header row: title, modern info icon, clear button -->
+	<div class="mb-3 flex items-center justify-between">
+		<div class="flex items-center gap-2">
+			<h2 class="text-lg font-semibold text-gray-900">Filter Jobs</h2>
+			<div class="relative group" aria-describedby="filters-help">
+				<button
+					type="button"
+					class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-orange-500 text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
+					aria-label="How to use filters"
+				>
+					<span aria-hidden="true" class="text-sm font-semibold leading-none select-none">i</span>
+				</button>
+				<div class="absolute left-1/2 -translate-x-1/2 mt-2 z-10 hidden group-hover:block group-focus-within:block w-80">
+					<div class="rounded-md border border-gray-200 bg-white p-3 shadow-lg text-xs text-gray-700">
+						<p class="font-medium text-gray-900 mb-1" id="filters-help">Multi-keyword tips</p>
+						<ul class="list-disc pl-4 space-y-1">
+							<li>Separate multiple values with commas or new lines.</li>
+							<li>Match is OR within a field, AND across fields.</li>
+							<li>Examples:
+								<ul class="list-disc pl-4 mt-1">
+									<li>Title: "QA, SDET"</li>
+									<li>Location: "NY, Remote"</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 		{#if filters.company || filters.location || filters.title}
 			<button
 				on:click={() => {
@@ -27,7 +54,8 @@
 			</button>
 		{/if}
 	</div>
-	
+
+	<!-- Filters row: always on second line -->
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 		<!-- Title Filter -->
 		<div>
