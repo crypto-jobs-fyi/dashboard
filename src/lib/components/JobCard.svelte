@@ -115,11 +115,17 @@
     </div>
     
     <!-- Level 3: Location -->
-    <div class="mt-3 pt-3 border-t border-gray-100 flex items-center text-sm text-gray-500">
-        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="mt-3 pt-3 border-t border-gray-100 flex items-start text-sm text-gray-500">
+        <svg class="w-4 h-4 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
         </svg>
-        <span>{job.location}</span>
+        <div class="relative group flex-1 min-w-0">
+            <span class="block line-clamp-2 break-words">{job.location}</span>
+            <div class="pointer-events-none absolute left-0 bottom-full mb-2 z-20 max-w-xs whitespace-normal rounded-md border border-gray-200 bg-white px-3 py-2 text-xs text-gray-700 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-150" role="tooltip">
+                {job.location}
+                <span class="absolute left-3 -bottom-1 h-2 w-2 rotate-45 bg-white border-l border-t border-gray-200"></span>
+            </div>
+        </div>
     </div>
 </div>
