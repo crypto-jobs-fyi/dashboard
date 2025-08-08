@@ -62,23 +62,23 @@
     }
 </script>
 
-<div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
+<div class="bg-white border border-gray-200 rounded-md p-4 hover:bg-gray-50 transition-colors">
     <!-- Level 1: Job Title -->
-    <div class="mb-3 text-center h-12 flex items-center justify-center">
-        <h3 class="text-xl font-bold text-gray-900 line-clamp-2 leading-6">
+    <div class="mb-2 text-left h-12 flex items-center">
+        <h3 class="text-lg font-semibold text-gray-900 line-clamp-2 leading-6 tracking-tight">
             {job.title}
         </h3>
     </div>
     
     <!-- Level 2: Company Name with Apply Button -->
-    <div class="flex justify-between items-center mb-2">
-        <div class="flex items-center text-sm text-gray-700">
+    <div class="flex justify-between items-center mb-1">
+        <div class="flex items-center text-[13px] text-gray-600">
             <div class="flex items-center mr-2">
                 {#if companiesLoaded && getCompanyLogo(job.company)}
                     <img 
                         src={getCompanyLogo(job.company)} 
                         alt="{job.company} logo"
-                        class="w-5 h-5 rounded-sm object-contain mr-2"
+                        class="w-5 h-5 rounded-full object-cover mr-2"
                         on:error={(e) => {
                             // Fallback to building icon if logo fails to load
                             const target = e.target as HTMLImageElement;
@@ -105,7 +105,7 @@
             href={applicationUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center px-3 py-1 bg-blue-600 text-white font-medium text-xs rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+            class="inline-flex items-center h-8 px-3 rounded-md border border-gray-300 bg-white text-gray-700 text-xs hover:bg-gray-50 transition-colors"
         >
             Apply
             <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,7 +115,7 @@
     </div>
     
     <!-- Level 3: Location -->
-    <div class="flex items-center text-sm text-gray-600">
+    <div class="mt-3 pt-3 border-t border-gray-100 flex items-center text-sm text-gray-500">
         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
